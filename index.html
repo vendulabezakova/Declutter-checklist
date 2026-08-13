@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>14-Day Declutter Challenge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #f8f6f0;
+      --card-bg: #ffffff;
+      --text: #2d312e;
+      --text-muted: #737b75;
+      --accent: #5b7065;
+      --accent-light: #e8ece9;
+      --border: #e2e8e4;
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 680px;
+      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+
+    header {
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Moodboard / Vision Board Section */
+    .moodboard {
+      width: 100%;
+      height: 220px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 28px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      position: relative;
+      background-color: var(--accent-light);
+    }
+
+    .moodboard img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .moodboard-caption {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(4px);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    /* Progress bar */
+    .progress-container {
+      background: var(--card-bg);
+      padding: 16px 20px;
+      border-radius: var(--radius);
+      margin-bottom: 28px;
+      border: 1px solid var(--border);
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar-bg {
+      height: 10px;
+      background: var(--accent-light);
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    /* Checklist Section */
+    .week-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 24px 0 12px 0;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .task-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .task-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .task-card.completed {
+      background: #f2f5f3;
+      border-color: transparent;
+      opacity: 0.75;
+    }
+
+    .task-card.completed .task-title {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 2px solid var(--accent);
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .task-card.completed .checkbox {
+      background: var(--accent);
+    }
+
+    .checkbox::after {
+      content: '✓';
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      display: none;
+    }
+
+    .task-card.completed .checkbox::after {
+      display: block;
+    }
+
+    .task-content {
+      flex: 1;
+    }
+
+    .task-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2px;
+    }
+
+    .task-day {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+    }
+
+    .task-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .task-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .reset-btn {
+      display: block;
+      margin: 32px auto 0 auto;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .reset-btn:hover {
+      color: #c94a4a;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Vyklízecí Výzva</h1>
+      <p class="subtitle">14 dní k čistšímu a vzdušnějšímu domovu</p>
+    </header>
+
+    <!-- MOODBOARD / FOTKA VIBE -->
+    <div class="moodboard">
+      <!-- Místo této fotky můžeš dát jakoukoliv vlastní URL obrázku (Pinterest, Unsplash...) -->
+      <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=1000&auto=format&fit=crop" alt="Home Vibe Inspirace">
+      <div class="moodboard-caption">✨ Můj Cílový Vibe</div>
+    </div>
+
+    <!-- PROGRESS BAR -->
+    <div class="progress-container">
+      <div class="progress-labels">
+        <span>Tvoje pokroky</span>
+        <span id="progress-text">0 / 14 hotovo</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- CHECKLIST -->
+    <div id="checklist"></div>
+
+    <button class="reset-btn" onclick="resetChallenge()">Vynulovat postup</button>
+  </div>
+
+  <script>
+    const tasks = [
+      // 1. Týden
+      { day: "Den 1", title: "Konferenční stolek & Pracovní kout", desc: "Vyhoď nefunkční propisky, papírky a staré účtenky. Ponech jen denní potřeby.", week: 1 },
+      { day: "Den 2", title: "Akvárium & Rostliny", desc: "Prober hnojiva a přípravky. Vyhoď uschlé listy a prázdné květináče.", week: 1 },
+      { day: "Den 3", title: "Ložnice – Knihy & Komody", desc: "Vyřaď knihy, které už nebudeš číst (do knihobudky / k prodeji).", week: 1 },
+      { day: "Den 4", title: "Ložnice – Oblečení & Věšák", desc: "Prober věšák a komody. Vyřaď poškozené věci a to, co jsi rok nenosila.", week: 1 },
+      { day: "Den 5", title: "Kuchyň – Linka & Plochy", desc: "Blesková čistka. Vyhoď prošlé koření a schovej nepotřebné spotřebiče.", week: 1 },
+      { day: "Den 6", title: "Kuchyň – Potravinové skříňky", desc: "Projdi zásoby. Otevřené a načaté věci, co už nikdo nesní, jdou pryč.", week: 1 },
+      { day: "Den 7", title: "Koupelna & WC", desc: "Vyhoď staré vzorky, vysušené řasenky, prošlé krémy a prázdné obaly.", week: 1 },
+      
+      // 2. Týden
+      { day: "Den 8", title: "Světlá komora – Smlouvy & Papíry", desc: "Skartuj stará vyúčtování, prospekty a smlouvy k vyhozeným věcem.", week: 2 },
+      { day: "Den 9", title: "Světlá komora – Výtvarné potřeby", desc: "Vyhoď zaschlé barvy, rozbité štětce a počmárané sešity bez využití.", week: 2 },
+      { day: "Den 10", title: "Tmavá komora – Krabice od stěhování", desc: "Zredukuj prázdné krabice na absolutní minimum.", week: 2 },
+      { day: "Den 11", title: "Tmavá komora – Konzervy & Jídlo", desc: "Zkontroluj data spotřeby u zásob jídla pod střechou.", week: 2 },
+      { day: "Den 12", title: "Tmavá komora – Úklid & Batohy", desc: "Zkontroluj batohy (nepotřebné pryč) a udělej místo pro vysavač a parní čistič.", week: 2 },
+      { day: "Den 13", title: "Tmavá komora – Sentimentální věci", desc: "Prober krabici vzpomínek. Nech si jen to, co ti dělá skutečnou radost.", week: 2 },
+      { day: "Den 14", title: "Velké finále & Odvoz!", desc: "Seber všechny tašky/krabice (popelnice, knihobudka, charita) a odnes je z bytu!", week: 2 }
+    ];
+
+    // Načtení dat z LocalStorage
+    let completedTasks = JSON.parse(localStorage.getItem('declutter_progress')) || [];
+
+    function renderChecklist() {
+      const container = document.getElementById('checklist');
+      container.innerHTML = '';
+
+      [1, 2].forEach(weekNum => {
+        const weekTitle = document.createElement('div');
+        weekTitle.className = 'week-title';
+        weekTitle.innerText = `${weekNum}. Týden: ${weekNum === 1 ? 'Obytné prostory & Kuchyň' : 'Komory & Dolaďování'}`;
+        container.appendChild(weekTitle);
+
+        tasks.filter(t => t.week === weekNum).forEach((task, index) => {
+          const globalIndex = tasks.indexOf(task);
+          const isCompleted = completedTasks.includes(globalIndex);
+
+          const card = document.createElement('div');
+          card.className = `task-card ${isCompleted ? 'completed' : ''}`;
+          card.onclick = () => toggleTask(globalIndex);
+
+          card.innerHTML = `
+            <div class="checkbox"></div>
+            <div class="task-content">
+              <div class="task-header">
+                <span class="task-day">${task.day}</span>
+              </div>
+              <div class="task-title">${task.title}</div>
+              <div class="task-desc">${task.desc}</div>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      });
+
+      updateProgress();
+    }
+
+    function toggleTask(index) {
+      if (completedTasks.includes(index)) {
+        completedTasks = completedTasks.filter(i => i !== index);
+      } else {
+        completedTasks.push(index);
+      }
+      localStorage.setItem('declutter_progress', JSON.stringify(completedTasks));
+      renderChecklist();
+    }
+
+    function updateProgress() {
+      const count = completedTasks.length;
+      const total = tasks.length;
+      const percentage = Math.round((count / total) * 100);
+
+      document.getElementById('progress-text').innerText = `${count} / ${total} hotovo (${percentage}%)`;
+      document.getElementById('progress-fill').style.width = `${percentage}%`;
+    }
+
+    function resetChallenge() {
+      if (confirm("Opravdu chceš vynulovat celý postup?")) {
+        completedTasks = [];
+        localStorage.removeItem('declutter_progress');
+        renderChecklist();
+      }
+    }
+
+    // Inicializace při načtení
+    renderChecklist();
+  </script>
+</body>
+</html>
