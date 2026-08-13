@@ -70,6 +70,9 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.06);
       position: relative;
       background-color: var(--accent-light);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
     }
 
     .moodboard img {
@@ -240,15 +243,17 @@
 
   <div class="container">
     <header>
-      <h1>Vyklízecí Výzva</h1>
+      <h1>Vyklízecí výzva</h1>
       <p class="subtitle">14 dní k čistšímu a vzdušnějšímu domovu</p>
     </header>
 
     <!-- MOODBOARD / FOTKA VIBE -->
     <div class="moodboard">
-      <!-- Místo této fotky můžeš dát jakoukoliv vlastní URL obrázku (Pinterest, Unsplash...) -->
-      <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=1000&auto=format&fit=crop" alt="Home Vibe Inspirace">
-      <div class="moodboard-caption">✨ Můj Cílový Vibe</div>
+      <img src="images/1.jpg" alt="Home Vibe Inspirace 1">
+      <img src="images/2.jpg" alt="Home Vibe Inspirace 2">
+      <img src="images/3.jpg" alt="Home Vibe Inspirace 3">
+      <img src="images/4.jpg" alt="Home Vibe Inspirace 4">
+      <div class="moodboard-caption">✨ Můj cílový vibe</div>
     </div>
 
     <!-- PROGRESS BAR -->
@@ -271,22 +276,22 @@
   <script>
     const tasks = [
       // 1. Týden
-      { day: "Den 1", title: "Konferenční stolek & Pracovní kout", desc: "Vyhoď nefunkční propisky, papírky a staré účtenky. Ponech jen denní potřeby.", week: 1 },
-      { day: "Den 2", title: "Akvárium & Rostliny", desc: "Prober hnojiva a přípravky. Vyhoď uschlé listy a prázdné květináče.", week: 1 },
-      { day: "Den 3", title: "Ložnice – Knihy & Komody", desc: "Vyřaď knihy, které už nebudeš číst (do knihobudky / k prodeji).", week: 1 },
-      { day: "Den 4", title: "Ložnice – Oblečení & Věšák", desc: "Prober věšák a komody. Vyřaď poškozené věci a to, co jsi rok nenosila.", week: 1 },
-      { day: "Den 5", title: "Kuchyň – Linka & Plochy", desc: "Blesková čistka. Vyhoď prošlé koření a schovej nepotřebné spotřebiče.", week: 1 },
-      { day: "Den 6", title: "Kuchyň – Potravinové skříňky", desc: "Projdi zásoby. Otevřené a načaté věci, co už nikdo nesní, jdou pryč.", week: 1 },
-      { day: "Den 7", title: "Koupelna & WC", desc: "Vyhoď staré vzorky, vysušené řasenky, prošlé krémy a prázdné obaly.", week: 1 },
-      
+      { day: "Den 1", title: "Konferenční stolek & PC koutek", desc: "Vyndej vše z ploch a šuplíků. Vyřaď papíry a nefunkční věci. Otři prázdné plochy od prachu a utři klávesnici/monitor.", week: 1 },
+      { day: "Den 2", title: "Akvárium & kytky", desc: "Vyhoď uschlé listy a prázdné květináče. Otři parapety, poličky pod kytkami a povrchy kolem akvária.", week: 1 },
+      { day: "Den 3", title: "Ložnice – knihy", desc: "Vyndej všechny knihy na hromadu. Ponech jen ty, které tě těší. Otři prázdné police od prachu, než je vrátíš zpět.", week: 1 },
+      { day: "Den 4", title: "Ložnice – oblečení & komody", desc: "Vyndej oblečení z věšáku/komody. Vyřaď nepoužívané. Vysaj nebo otři vnitřky zásuvek a skříní.", week: 1 },
+      { day: "Den 5", title: "Kuchyň – linka & spotřebiče", desc: "Vykliď věci z pracovní desky. Odmašťovačem a párou/hadříkem odmasti a otři celou linku i povrchy spotřebičů.", week: 1 },
+      { day: "Den 6", title: "Kuchyň – potravinové skříňky", desc: "Vyndej všechny potraviny. Vyhoď prošlé. Vymyj/otři vnitřky skříněk a uspořádej zásoby zpět.", week: 1 },
+      { day: "Den 7", title: "Koupelna & WC", desc: "Vyndej veškerou kosmetiku. Vyhoď prázdné obaly a prošlé věci. Vydrhni prázdné poličky, zrcadlo a umyvadlo.", week: 1 },
+
       // 2. Týden
-      { day: "Den 8", title: "Světlá komora – Smlouvy & Papíry", desc: "Skartuj stará vyúčtování, prospekty a smlouvy k vyhozeným věcem.", week: 2 },
-      { day: "Den 9", title: "Světlá komora – Výtvarné potřeby", desc: "Vyhoď zaschlé barvy, rozbité štětce a počmárané sešity bez využití.", week: 2 },
-      { day: "Den 10", title: "Tmavá komora – Krabice od stěhování", desc: "Zredukuj prázdné krabice na absolutní minimum.", week: 2 },
-      { day: "Den 11", title: "Tmavá komora – Konzervy & Jídlo", desc: "Zkontroluj data spotřeby u zásob jídla pod střechou.", week: 2 },
-      { day: "Den 12", title: "Tmavá komora – Úklid & Batohy", desc: "Zkontroluj batohy (nepotřebné pryč) a udělej místo pro vysavač a parní čistič.", week: 2 },
-      { day: "Den 13", title: "Tmavá komora – Sentimentální věci", desc: "Prober krabici vzpomínek. Nech si jen to, co ti dělá skutečnou radost.", week: 2 },
-      { day: "Den 14", title: "Velké finále & Odvoz!", desc: "Seber všechny tašky/krabice (popelnice, knihobudka, charita) a odnes je z bytu!", week: 2 }
+      { day: "Den 8", title: "Světlá komora – doklady & papíry", desc: "Roztřiď šanony. Skartuj staré papíry. Otři prach ze stolku/polic s dokumenty.", week: 2 },
+      { day: "Den 9", title: "Světlá komora – výtvarné potřeby", desc: "Prober barvy a bloky. Otři boxy nebo poličky od prachu a zbytků barev.", week: 2 },
+      { day: "Den 10", title: "Tmavá komora – krabice od stěhování", desc: "Zredukuj prázdné krabice. Vysaj roh, kde stály, a vytři tam podlahu.", week: 2 },
+      { day: "Den 11", title: "Tmavá komora – zásoby & konzervy", desc: "Prober jídlo pod střechou. Vymyj poličky, kde se na zásoby práší.", week: 2 },
+      { day: "Den 12", title: "Tmavá komora – batohy & čisticí technika", desc: "Zorganizuj batohy. Vyčisti prostor pro vysavač a parní čistič, otři z nich prach.", week: 2 },
+      { day: "Den 13", title: "Tmavá komora – sentimentální věci", desc: "Prober krabice vzpomínek na světle. Otři krabice od prachu a vrať jen to nejdůležitější.", week: 2 },
+      { day: "Den 14", title: "Velké finále – odvoz & podlahy", desc: "Vyneseš všechny tašky pryč z bytu. Vytři kompletně podlahy v obýváku, ložnici i komorách.", week: 2 }
     ];
 
     // Načtení dat z LocalStorage
@@ -299,7 +304,7 @@
       [1, 2].forEach(weekNum => {
         const weekTitle = document.createElement('div');
         weekTitle.className = 'week-title';
-        weekTitle.innerText = `${weekNum}. Týden: ${weekNum === 1 ? 'Obytné prostory & Kuchyň' : 'Komory & Dolaďování'}`;
+        weekTitle.innerText = `${weekNum}. Týden: ${weekNum === 1 ? 'Obytné prostory & kuchyň' : 'Komory & finále'}`;
         container.appendChild(weekTitle);
 
         tasks.filter(t => t.week === weekNum).forEach((task, index) => {
